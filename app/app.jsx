@@ -20,22 +20,15 @@ export default class App extends React.Component {
   }
 
   render() {
-    const appContext = {
-      App: { App: this.state }
-    }
-    console.log(this.context);
+    const appContext = { App: this.state };
+    console.log(appContext);
     return (
       <AppContext.Provider value={appContext}>
         <Router>
           {Nav()}
-          <h1>{this.state.title}</h1>
           <Switch>
-            <Route path="/">
-              <Home />
-            </Route>
-            <Route path="/music">
-              <Music />
-            </Route>
+            <Route path="/music" component={Music} />
+            <Route path="/" component={Home} />
           </Switch>
         </Router>
       </AppContext.Provider>
