@@ -8,6 +8,9 @@ const Nav = props => {
         <li>
           <Link to="/">Home</Link>
         </li>
+        <li>
+          <Link to="/music">Music</Link>
+        </li>
       </ul>
     </nav>
   );
