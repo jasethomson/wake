@@ -4,7 +4,8 @@
   "description": "Wake",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,6 @@
   },
   "homepage": "https://github.com/jasethomson/wake#readme",
   "dependencies": {
-    "@babel/core": "^7.13.16",
     "btoa": "^1.2.1",
     "cookie-parser": "^1.4.5",
     "ejs": "^3.1.6",
@@ -30,7 +30,12 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
-    "sass": "^1.32.11",
-    "webpack": "^5.36.0"
+    "sass": "^1.32.11"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.16",
+    "webpack": "^5.36.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
   }
 }
