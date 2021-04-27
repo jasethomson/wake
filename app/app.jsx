@@ -25,7 +25,7 @@ export default class App extends React.Component {
     return (
       <AppContext.Provider value={appContext}>
         <Router>
-          {Nav()}
+          <Nav />
           <Switch>
             <Route path="/music" component={Music} />
             <Route path="/" component={Home} />

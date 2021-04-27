@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useContext, createContext } from 'react';
 import { Link } from 'react-router-dom';
+import AppContext from '../context';
 
-const Nav = props => {
+const Nav = () => {
+  const navContext = useContext(AppContext);
+  navContext.Nav = { Title: "Nav" };
+  createContext(navContext);
+  console.log('nav', navContext);
   return (
     <nav>
       <ul>
