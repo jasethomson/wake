@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Nav = props => {
+const Nav = props => {
   return (
     <nav>
       <ul>
@@ -11,3 +11,5 @@ export const Nav = props => {
     </nav>
   );
 }
+
+export default Nav;
