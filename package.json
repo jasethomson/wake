@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=production",
-    "devold": "webpack serve --mode=development",
     "dev": "npm-run-all --silent --parallel dev:*",
     "dev:client": "webpack serve --mode=development",
     "dev:server": "nodemon server/index.js",
@@ -48,6 +47,7 @@
     "@babel/plugin-transform-block-scoping": "^7.13.16",
     "@babel/plugin-transform-react-jsx": "^7.13.12",
     "babel-loader": "^8.2.2",
+    "nodemon": "^2.0.7",
     "npm-run-all": "^4.1.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

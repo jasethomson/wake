@@ -18,16 +18,20 @@ export default class Music extends React.Component {
   handleSubmit(submission) {
     console.log("submission", submission);
     let youTubeData = submission.id.length > 1 ? this.getYouTubeData(submission.id) : null;
+    event.preventDefault();
   }
 
   getYouTubeData(id) {
-    console.log()
-    // let url = ``;
-    // fetch(url)
+    // fetch('http://localhost:5000/todos')
+    //   .then(res => res.json())
+    //   .then(todos => console.log('todos', todos))
   }
 
   render() {
     console.log("music", this.context);
+    fetch('http://localhost:5000/todos')
+      .then(res => res.json())
+      .then(todos => console.log(todos));
     this.context.Music = this.state;
     return (
       <Header
