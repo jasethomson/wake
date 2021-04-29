@@ -32,9 +32,9 @@ class Search extends React.Component {
     this.setState({ value, id });
   }
 
-  handleSubmit() {
-    console.log(`${this.state.value}, with ${this.state.id} was submitted`);
-    event.preventDefault();
+  handleSubmit(e) {
+    this.props.pageProps.handleSubmit({ value: this.state.value, id: this.state.id });
+    e.preventDefault();
   }
 
   render() {

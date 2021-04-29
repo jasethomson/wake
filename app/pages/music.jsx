@@ -12,8 +12,18 @@ export default class Music extends React.Component {
   }
 
   getYoutubeId(url) {
-    let id = url.indexOf('.com') > 1 ? url.split('=')[1].split('&')[0] : '';
-    return id;
+    return url.indexOf('.com') > 1 ? url.split('=')[1].split('&')[0] : '';
+  }
+
+  handleSubmit(submission) {
+    console.log("submission", submission);
+    let youTubeData = submission.id.length > 1 ? this.getYouTubeData(submission.id) : null;
+  }
+
+  getYouTubeData(id) {
+    console.log()
+    // let url = ``;
+    // fetch(url)
   }
 
   render() {
@@ -23,6 +33,7 @@ export default class Music extends React.Component {
       <Header
         search
         stateVal={this.getYoutubeId}
+        handleSubmit={this.handleSubmit}
       />
     );
   }
