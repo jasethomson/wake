@@ -1,5 +1,6 @@
 import React from "react";
 import AppContext from '../context';
+import Header from '../components/header';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -13,7 +14,10 @@ export default class Home extends React.Component {
     console.log("home", this.context);
     this.context.Home = this.state;
     return (
-      <h1>{this.state.title}</h1>
+      <Header
+        title={this.state.title}
+      />
+
     );
   }
 }
