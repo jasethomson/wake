@@ -23,8 +23,29 @@ app.use(session({
 
 //ROUTES//
 
+//create a song
+
+app.post("/music", async (req, res) => {
+  try {
+    const { title, artist } = req.body;
+    const newSong = await pool.query(
+      `INSERT INTO music (title, artist)
+      VALUES('${title}','${artist}')
+      RETURNING *;`
+    );
+
+    res.json(newSong.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+// get songs
+
+
+
 app.get("/todos", async (req, res) => {
-  // let body = tubeReq.euery.body ? tubeReq.query.body : tubeReq.body;
+  // let body = tubeReq.query.body ? tubeReq.query.body : tubeReq.body;
   try {
     const allTodos = await pool.query("SELECT * FROM todo");
     res.json(allTodos.rows);
