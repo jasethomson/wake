@@ -35,6 +35,10 @@ class Search extends React.Component {
   handleSubmit() {
     event.preventDefault();
     this.props.pageProps.handleSubmit({ value: this.state.value, id: this.state.id });
+    this.setState({
+      value: '',
+      id: ''
+    });
   }
 
   render() {
