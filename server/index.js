@@ -23,15 +23,81 @@ app.use(session({
 
 //ROUTES//
 
-app.get("/todos", async (req, res) => {
-  // let body = tubeReq.euery.body ? tubeReq.query.body : tubeReq.body;
+//create a song
+
+app.post("/music", async (req, res) => {
   try {
-    const allTodos = await pool.query("SELECT * FROM todo");
-    res.json(allTodos.rows);
+    const { title, artist } = req.body;
+    const newSong = await pool.query(
+      `INSERT INTO music (title, artist)
+      VALUES('${title}','${artist}')
+      RETURNING *;`
+    );
+    res.json(newSong.rows[0]);
   } catch (err) {
     console.error(err.message);
   }
 });
+
+// get songs
+
+app.get("/music", async (req, res) => {
+  try {
+    const allMusic = await pool.query("SELECT * FROM music;");
+    res.json(allMusic.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+// get one song
+
+app.get("/music/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const song = await pool.query(`SELECT * FROM music WHERE song_id = ${id};`);
+    res.json(song.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+// update a song
+
+app.put("/music/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, artist } = req.body;
+    const updateSong = await pool.query(
+      `UPDATE music
+      SET title = '${title}',
+          artist = '${artist}',
+          dateupdated = CURRENT_TIMESTAMP
+      WHERE song_id = ${id}
+      RETURNING *;`
+    );
+    res.json(updateSong.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+//delete a song
+
+app.delete("/music/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleteSong = await pool.query(
+      `DELETE FROM music
+      WHERE song_id = ${id};`
+    );
+    res.json("Song deleted.");
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+// youtube song
 
 app.get("/tube", async (req, res) => {
   // const port = options.port == 443 ? https : http;
