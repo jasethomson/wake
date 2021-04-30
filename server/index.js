@@ -55,7 +55,7 @@ app.get("/music", async (req, res) => {
 app.get("/music/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const song = await pool.query(`SELECT * FROM music WHERE song_id = ${id}`);
+    const song = await pool.query(`SELECT * FROM music WHERE song_id = ${id};`);
     res.json(song.rows[0]);
   } catch (err) {
     console.error(err.message);
@@ -68,32 +68,36 @@ app.put("/music/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { title, artist } = req.body;
-
-    console.log(id, title, artist)
     const updateSong = await pool.query(
       `UPDATE music
       SET title = '${title}',
-          artist = '${artist}'
-      WHERE song_id = ${id}`
-    );
-    console.log(`UPDATE music
-      SET title = '${title}',
           artist = '${artist}',
-      WHERE song_id = ${id}`)
-    res.json("Song updated");
+          dateupdated = CURRENT_TIMESTAMP
+      WHERE song_id = ${id}
+      RETURNING *;`
+    );
+    res.json(updateSong.rows[0]);
   } catch (err) {
     console.error(err.message);
   }
 });
 
-app.get("/todos", async (req, res) => {
+//delete a song
+
+app.delete("/music/:id", async (req, res) => {
   try {
-    const allTodos = await pool.query("SELECT * FROM todo");
-    res.json(allTodos.rows);
+    const { id } = req.params;
+    const deleteSong = await pool.query(
+      `DELETE FROM music
+      WHERE song_id = ${id};`
+    );
+    res.json("Song deleted.");
   } catch (err) {
     console.error(err.message);
   }
 });
+
+// youtube song
 
 app.get("/tube", async (req, res) => {
   // const port = options.port == 443 ? https : http;
