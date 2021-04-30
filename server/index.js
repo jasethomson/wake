@@ -50,9 +50,21 @@ app.get("/music", async (req, res) => {
   }
 });
 
+// get one song
+
+app.get("/music/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const song = await pool.query(`SELECT * FROM music WHERE song_id = ${id}`);
+    res.json(song.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+// update a song
 
 app.get("/todos", async (req, res) => {
-  // let body = tubeReq.query.body ? tubeReq.query.body : tubeReq.body;
   try {
     const allTodos = await pool.query("SELECT * FROM todo");
     res.json(allTodos.rows);
