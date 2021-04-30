@@ -33,7 +33,6 @@ app.post("/music", async (req, res) => {
       VALUES('${title}','${artist}')
       RETURNING *;`
     );
-
     res.json(newSong.rows[0]);
   } catch (err) {
     console.error(err.message);
@@ -42,6 +41,14 @@ app.post("/music", async (req, res) => {
 
 // get songs
 
+app.get("/music", async (req, res) => {
+  try {
+    const allMusic = await pool.query("SELECT * FROM music;");
+    res.json(allMusic.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
 
 
 app.get("/todos", async (req, res) => {
