@@ -64,6 +64,28 @@ app.get("/music/:id", async (req, res) => {
 
 // update a song
 
+app.put("/music/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, artist } = req.body;
+
+    console.log(id, title, artist)
+    const updateSong = await pool.query(
+      `UPDATE music
+      SET title = '${title}',
+          artist = '${artist}'
+      WHERE song_id = ${id}`
+    );
+    console.log(`UPDATE music
+      SET title = '${title}',
+          artist = '${artist}',
+      WHERE song_id = ${id}`)
+    res.json("Song updated");
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
 app.get("/todos", async (req, res) => {
   try {
     const allTodos = await pool.query("SELECT * FROM todo");
