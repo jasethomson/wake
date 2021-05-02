@@ -15,14 +15,13 @@ export default class Table extends React.Component {
       <table>
         <thead>
           <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Artist</th>
-            <th>Date Added</th>
+            {this.props.cols.map(col => {
+              return <th key={col.name}>{col.header}</th>
+            })}
           </tr>
         </thead>
         <tbody>
-          {this.props.songs.length ?
+          {this.props.songs ?
             this.props.songs.map(song => {
               return (
                 <tr key={count}>
