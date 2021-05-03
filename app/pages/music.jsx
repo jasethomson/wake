@@ -28,11 +28,11 @@ export default class Music extends React.Component {
     let youTubeData = submission.id.length > 1 ? getYouTubeData(submission.id, this.addSong) : null;
   }
 
-  // getSongs() {
-  //   fetch(`http://localhost:5000/music`)
-  //     .then(res => res.json())
-  //     .then(songs => this.setState({ songs }))
-  // }
+  getSongs() {
+    fetch(`http://localhost:5000/music`)
+      .then(res => res.json())
+      .then(songs => this.setState({ songs }))
+  }
 
   addSong(song) {
     fetch(`http://localhost:5000/music`, {
@@ -43,10 +43,13 @@ export default class Music extends React.Component {
       .then(song => console.log(song))
   }
 
+  componentDidMount() {
+    this.getSongs();
+  }
+
   render() {
     console.log("music", this.context);
     this.context.Music = this.state;
-    this.getSongs();
     return (
       <div className="pageTop">
         <Header
