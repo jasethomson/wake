@@ -17,10 +17,11 @@ export default class Music extends React.Component {
           { name: "count", header: "#" },
           { name: "title", header: "Title" },
           { name: "artist", header: "Artist" },
-          { name: "datedadded", header: "Date Added" }
+          { name: "dateadded", header: "Date Added" }
         ]
       },
-      songs: []
+      songs: [],
+      songs_id: "song_id"
     }
   }
 
@@ -62,8 +63,9 @@ export default class Music extends React.Component {
           handleSubmit={this.handleSubmit}
         />
         <Table
-          songs={this.state.songs}
+          data={this.state.songs}
           cols={this.state.cols.songs}
+          id={this.state.songs_id}
           countCol
         />
       </div>

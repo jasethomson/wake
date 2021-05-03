@@ -21,14 +21,17 @@ export default class Table extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {this.props.songs ?
-            this.props.songs.map(song => {
+          {this.props.data ?
+            this.props.data.map(dataPiece => {
               return (
-                <tr key={count}>
-                  <td className="td-#">{++count}</td>
-                  <td className="td-title">{song.title}</td>
-                  <td className="td-artist">{song.artist}</td>
-                  <td className="td-dateAdded">{song.dateAdded}</td>
+                <tr key={dataPiece[this.props.id]}>
+                  {this.props.cols.map(col => {
+                    if (col.name === "count") {
+                      return <td key={++count}>{count}</td>;
+                    } else {
+                      return <td key={dataPiece[col.name]}>{dataPiece[col.name]}</td>;
+                    }
+                  })}
                 </tr>
               );
             }) : null}
