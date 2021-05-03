@@ -2,7 +2,6 @@ const pool = require("../db");
 
 const addSong = async (req, res) => {
   try {
-    console.log("addSong:", req.body)
     const { title, artist } = req.body;
     const newSong = await pool.query(
       `INSERT INTO music (title, artist)

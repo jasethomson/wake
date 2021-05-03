@@ -8,7 +8,6 @@ export const getYouTubeData = (id, addSong) => {
   fetch(`http://localhost:5000/tube?id=${id}`)
     .then(res => res.json())
     .then(data => {
-      console.log(data, "youtube")
       let song = {};
       let songInfo = data.items[0].snippet.localized.title;
       let ft = songInfo.indexOf('ft.') > 1 ? songInfo.split('ft.')[songInfo.split('ft.').length - 1] : '';
