@@ -3,70 +3,82 @@ import AppContext from "../context";
 
 import Header from "../components/header";
 import Table from "../components/table";
+import { getYouTubeData, getYoutubeId } from "../utils/tube";
 
 export default class Music extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.addSong = this.addSong.bind(this);
+    this.deleteSong = this.deleteSong.bind(this);
     this.state = {
       title: "Music",
-      songs: [
-        {
-          title: "Shelter",
-          artist: "Birdy",
-          dateAdded: "04/29/2021"
-        }
-      ]
+      cols: {
+        songs: [
+          { name: "count", header: "#" },
+          { name: "title", header: "Title" },
+          { name: "artist", header: "Artist" },
+          { name: "dateadded", header: "Date Added" },
+          { name: "delete", header: "" },
+        ]
+      },
+      songs: [],
+      songs_id: "song_id"
     }
-  }
-
-  getYoutubeId(url) {
-    return url.indexOf('.com') > 1 ? url.split('=')[1].split('&')[0] : '';
   }
 
   handleSubmit(submission) {
     event.preventDefault();
-    let youTubeData = submission.id.length > 1 ? this.getYouTubeData(submission.id) : null;
+    let youTubeData = submission.id.length > 1 ? getYouTubeData(submission.id, this.addSong) : null;
   }
 
-  getYouTubeData(id) {
-    fetch(`http://localhost:5000/tube?id=${id}`)
+  getSongs() {
+    fetch(`http://localhost:5000/music`)
       .then(res => res.json())
-      .then(data => {
-        let song = {};
-        let songInfo = data.items[0].snippet.localized.title;
-        let ft = songInfo.indexOf('ft.') > 1 ? songInfo.split('ft.')[songInfo.split('ft.').length - 1] : '';
-        song.artist = songInfo.split('-', 1)[0];
-        song.artist += `ft. ${ft}`;
-        song.title = songInfo.split('-')[1];
-        song.title = song.title.slice(0, song.title.indexOf('('));
-        let dateObj = new Date();
-        let month = dateObj.getUTCMonth() + 1;
-        let day = dateObj.getUTCDate();
-        let year = dateObj.getUTCFullYear();
-        song.dateAdded = month + "/" + day + "/" + year;
-        this.setState({
-          songs: [...this.state.songs, song]
-        });
-      });
+      .then(songs => this.setState({ songs }))
+  }
+
+  addSong(song) {
+    fetch(`http://localhost:5000/music`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(song)
+    })
+      .then(res => res.json())
+      .then(song => this.setState({ songs: [...this.state.songs, song] }));
+  }
+
+  deleteSong(id) {
+    fetch(`http://localhost:5000/music/${id}`, {
+      method: "DELETE"
+    })
+      .then(res => res.json())
+      .then(result => this.getSongs());
+  }
+
+  componentDidMount() {
+    this.getSongs();
   }
 
   render() {
     console.log("music", this.context);
     this.context.Music = this.state;
-
     return (
       <div className="pageTop">
         <Header
           search
-          stateVal={this.getYoutubeId}
+          stateVal={getYoutubeId}
           handleSubmit={this.handleSubmit}
         />
         <Table
-          songs={this.state.songs}
+          data={this.state.songs}
+          cols={this.state.cols.songs}
+          id={this.state.songs_id}
+          delClick={this.deleteSong}
         />
       </div>
-
     );
   }
 }

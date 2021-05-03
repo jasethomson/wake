@@ -15,21 +15,25 @@ export default class Table extends React.Component {
       <table>
         <thead>
           <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Artist</th>
-            <th>Date Added</th>
+            {this.props.cols.map(col => {
+              return <th key={col.name}>{col.header}</th>
+            })}
           </tr>
         </thead>
         <tbody>
-          {this.props.songs.length ?
-            this.props.songs.map(song => {
+          {this.props.data ?
+            this.props.data.map(dataPiece => {
               return (
-                <tr key={count}>
-                  <td className="td-#">{++count}</td>
-                  <td className="td-title">{song.title}</td>
-                  <td className="td-artist">{song.artist}</td>
-                  <td className="td-dateAdded">{song.dateAdded}</td>
+                <tr key={dataPiece[this.props.id]}>
+                  {this.props.cols.map(col => {
+                    if (col.name === "count") {
+                      return <td key={++count}>{count}</td>;
+                    } else if (col.name === "delete") {
+                      return <td key={`${count}-delete`}><div onClick={() => this.props.delClick(dataPiece[this.props.id])}><i className="far fa-minus-square"></i></div></td>;
+                    } else {
+                      return <td key={dataPiece[col.name]}>{dataPiece[col.name]}</td>;
+                    }
+                  })}
                 </tr>
               );
             }) : null}
