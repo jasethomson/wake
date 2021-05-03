@@ -1,19 +1,17 @@
 const pool = require("../db");
 
-const addSong = app => {
-  app.post("/music", async (req, res) => {
-    try {
-      const { title, artist } = req.body;
-      const newSong = await pool.query(
-        `INSERT INTO music (title, artist)
+const addSong = async (req, res) => {
+  try {
+    const { title, artist } = req.body;
+    const newSong = await pool.query(
+      `INSERT INTO music (title, artist)
       VALUES('${title}','${artist}')
       RETURNING *;`
-      );
-      res.json(newSong.rows[0]);
-    } catch (err) {
-      console.error(err.message);
-    }
-  });
+    );
+    res.json(newSong.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
 }
 
 const getSongs = async (req, res) => {
