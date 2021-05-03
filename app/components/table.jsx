@@ -28,6 +28,8 @@ export default class Table extends React.Component {
                   {this.props.cols.map(col => {
                     if (col.name === "count") {
                       return <td key={++count}>{count}</td>;
+                    } else if (col.name === "delete") {
+                      return <td key={`${count}-delete`}><div onClick={() => this.props.delClick(dataPiece[this.props.id])}><i className="far fa-minus-square"></i></div></td>;
                     } else {
                       return <td key={dataPiece[col.name]}>{dataPiece[col.name]}</td>;
                     }

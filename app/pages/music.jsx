@@ -10,6 +10,7 @@ export default class Music extends React.Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addSong = this.addSong.bind(this);
+    this.deleteSong = this.deleteSong.bind(this);
     this.state = {
       title: "Music",
       cols: {
@@ -17,7 +18,8 @@ export default class Music extends React.Component {
           { name: "count", header: "#" },
           { name: "title", header: "Title" },
           { name: "artist", header: "Artist" },
-          { name: "dateadded", header: "Date Added" }
+          { name: "dateadded", header: "Date Added" },
+          { name: "delete", header: "" },
         ]
       },
       songs: [],
@@ -48,6 +50,14 @@ export default class Music extends React.Component {
       .then(song => this.setState({ songs: [...this.state.songs, song] }));
   }
 
+  deleteSong(id) {
+    fetch(`http://localhost:5000/music/${id}`, {
+      method: "DELETE"
+    })
+      .then(res => res.json())
+      .then(result => this.getSongs());
+  }
+
   componentDidMount() {
     this.getSongs();
   }
@@ -66,10 +76,9 @@ export default class Music extends React.Component {
           data={this.state.songs}
           cols={this.state.cols.songs}
           id={this.state.songs_id}
-          countCol
+          delClick={this.deleteSong}
         />
       </div>
-
     );
   }
 }
