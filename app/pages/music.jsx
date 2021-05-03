@@ -9,6 +9,7 @@ export default class Music extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.addSong = this.addSong.bind(this);
     this.state = {
       title: "Music",
       cols: {
@@ -37,10 +38,13 @@ export default class Music extends React.Component {
   addSong(song) {
     fetch(`http://localhost:5000/music`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(song)
     })
       .then(res => res.json())
-      .then(song => console.log(song))
+      .then(song => this.setState({ songs: [...this.state.songs, song] }));
   }
 
   componentDidMount() {
