@@ -1,0 +1,7 @@
+.header {
+  @include header(70px, 100%, 44px, calc(100% - 2rem), 1rem);
+}
+
+table {
+  @include table(40px);
+}

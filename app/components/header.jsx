@@ -43,8 +43,8 @@ class Search extends React.Component {
     this.context.Search = this.state;
     return (
       <form onSubmit={this.handleSubmit} className={`search`}>
-        <input type="text" value={this.state.value} onChange={this.handleChange} />
         <button className="btn-icon" type="submit"><i className="fas fa-search"></i></button>
+        <input type="text" value={this.state.value} onChange={this.handleChange} />
       </form>
     )
   }

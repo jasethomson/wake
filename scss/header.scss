@@ -1,0 +1,35 @@
+header {
+  height: $header-height;
+  background: $htmlBgrd-color-dark;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: $header-border-bottom;
+  .logoName, nav {
+    display: flex;
+    align-items: center;
+  }
+  .logoName {
+    margin-left: .5rem;
+    h3 {
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: whitesmoke;
+    }
+  }
+  nav {
+    height: 100%;
+    ul {
+      margin: 0px;
+      padding: 0px;
+      display: flex;
+      li {
+        margin-right: 1rem;
+        list-style: none;
+        a {
+          color: whitesmoke;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

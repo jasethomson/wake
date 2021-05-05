@@ -25,7 +25,12 @@ export default class App extends React.Component {
     return (
       <AppContext.Provider value={appContext}>
         <Router>
-          <Nav />
+          <header>
+            <div className="logoName">
+              <h3>Wake</h3>
+            </div>
+            <Nav />
+          </header>
           <Switch>
             <Route path="/music" component={Music} />
             <Route path="/" component={Home} />

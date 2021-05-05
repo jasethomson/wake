@@ -1,3 +1,25 @@
-table {
 
+
+
+@mixin table($tr-height) {
+  width: $table-width;
+  thead {
+
+  }
+  tbody {
+
+  }
+  .td-count,
+  .td-icon {
+    text-align: center;
+  }
+  td, th {
+    text-align: left;
+  }
+  tr {
+    height: $tr-height;
+  }
+  .td-icon {
+    cursor: pointer;
+  }
 }

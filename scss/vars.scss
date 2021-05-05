@@ -1,0 +1,30 @@
+//Fonts
+$first-font: 'Montserrat', sans-serif;
+
+//Typography
+$h-margin: 0rem;
+
+// DARK THEME
+$htmlBgrd-color-dark: #161b22;
+$bodyBgrd-color-dark: lighten($htmlBgrd-color-dark, 1%);
+$body-color-dark: #efefef;
+$header-input-bkgd-color-dark: rgb(59, 59, 59);
+$header-btn-bkgd-color-dark: rgb(59, 59, 59);
+
+// LIGHT THEME
+$htmlBgrd-color-light: #f8f8f8;
+
+//Borders
+$header-border-bottom: 1px solid $htmlBgrd-color-dark;
+$header-border-bottom-px: 1px;
+
+//Heights
+$header-height: 70px;
+$html-height: 100%;
+$body-height: 100%;
+$body-margin: 0rem;
+$app-height: 100%;
+$pageTop-height: calc(100% - (#{$header-height} + #{$header-border-bottom-px}));
+
+//Widths
+$table-width: 100%;

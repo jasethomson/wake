@@ -14,7 +14,7 @@ export default class Home extends React.Component {
     console.log("home", this.context);
     this.context.Home = this.state;
     return (
-      <div className="pageTop">
+      <div className="pageTop pageHome">
         <Header
           title={this.state.title}
         />
