@@ -1,2 +1,6 @@
-@import './global';
-@import './table';
+@import './vars.scss';
+@import './global.scss';
+@import './header.scss';
+@import './table.scss';
+@import './mixins.scss';
+@import './pageImports';

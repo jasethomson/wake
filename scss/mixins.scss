@@ -1,0 +1,32 @@
+@mixin header($height, $width, $form-height, $form-width, $form-margin-left-right) {
+  height: $height;
+  width: $width;
+  display: flex;
+  align-items: center;
+  form {
+    height: $form-height;
+    width: $form-width;
+    margin-left: $form-margin-left-right;
+    margin-right: $form-margin-left-right;
+    display: flex;
+    input {
+      background: $header-input-bkgd-color-dark;
+      width: $width;
+      display: flex;
+      align-items: center;
+      padding: 12px 10px;
+      flex: 1;
+      border: 0;
+      outline: none;
+      -webkit-appearance: none;
+      font-size: 1.125rem;
+      font: inherit;
+    }
+    button {
+      background: $header-btn-bkgd-color-dark;
+      width: 3rem;
+      border: none;
+    }
+  }
+
+}

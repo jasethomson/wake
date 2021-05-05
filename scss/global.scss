@@ -1,3 +1,20 @@
 html{
-  background: #f8f8f8;
+  background: $htmlBgrd-color-dark;
+  height: $html-height;
+  body {
+    background: $bodyBgrd-color-dark;
+    font-family: $first-font;
+    color: $body-color-dark;
+    height: $body-height;
+    margin: $body-margin;
+    .app {
+      height: $app-height;
+      .pageTop {
+        height: $pageTop-height;
+      }
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin: $h-margin;
+    }
+  }
 }

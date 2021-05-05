@@ -66,7 +66,7 @@ export default class Music extends React.Component {
     console.log("music", this.context);
     this.context.Music = this.state;
     return (
-      <div className="pageTop">
+      <div className="pageTop pageMusic">
         <Header
           search
           stateVal={getYoutubeId}

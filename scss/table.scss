@@ -1,3 +1,19 @@
-table {
 
+
+
+@mixin table() {
+  width: $table-width;
+  thead {
+
+  }
+  tbody {
+
+  }
+  .td-count,
+  .td-icon {
+    text-align: center;
+  }
+  td, th {
+    text-align: left;
+  }
 }
