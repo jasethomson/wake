@@ -3,5 +3,5 @@
 }
 
 table {
-  @include table();
+  @include table(40px);
 }

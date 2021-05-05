@@ -29,7 +29,7 @@ export default class Table extends React.Component {
                     if (col.name === "count") {
                       return <td className="td-count" key={++count}>{count}</td>;
                     } else if (col.name === "delete") {
-                      return <td className="td-icon" key={`${count}-delete`}><div onClick={() => this.props.delClick(dataPiece[this.props.id])}><i className="fas fa-minus-circle"></i></div></td>;
+                      return <td className="td-icon" key={`${count}-delete`}><div onClick={() => this.props.delClick(dataPiece[this.props.id])}><i className="fas fa-minus-circle fa-lg"></i></div></td>;
                     } else {
                       return <td key={dataPiece[col.name]}>{dataPiece[col.name]}</td>;
                     }

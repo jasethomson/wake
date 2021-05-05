@@ -1,7 +1,7 @@
 
 
 
-@mixin table() {
+@mixin table($tr-height) {
   width: $table-width;
   thead {
 
@@ -15,5 +15,11 @@
   }
   td, th {
     text-align: left;
+  }
+  tr {
+    height: $tr-height;
+  }
+  .td-icon {
+    cursor: pointer;
   }
 }
