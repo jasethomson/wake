@@ -1,13 +1,12 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Home from './pages/home';
-import Music from './pages/music';
+import { Routes } from './utils/routes';
 
 const AppSwitch = props => {
+  const routes = Routes();
   return (
     <Switch>
-      <Route path="/music" component={Music} />
-      <Route path="/" component={Home} />
+      {routes.map(route => <Route key={route.path} path={route.path} component={route.component} />)}
     </Switch>
   );
 }
