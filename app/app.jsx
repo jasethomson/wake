@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
-import AppSwitch from './switch';
+import AppSwitch from './appSwitch';
 import NavHeader from './components/navHeader';
 
 const App = props => {
