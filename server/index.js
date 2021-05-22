@@ -5,12 +5,8 @@ const app = express();
 const cors = require("cors");
 const https = require('https');
 const path = require('path');
-const verify = require("./backend/verify");
 const tools = require('./backend/tools');
-
 const routes = require('./backend/routes');
-
-// console.log(verify);
 
 app.use(express.static(path.resolve(__dirname, './public')));
 
@@ -29,5 +25,5 @@ app.get('*', (req, res) => {
 });
 
 app.listen(5000, () => {
-  console.log("Server has started on port 5432.");
-})
+  console.log("Server has started on port 5000.");
+});

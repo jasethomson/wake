@@ -18,6 +18,7 @@ export default class Home extends React.Component {
         <Header
           title={this.state.title}
         />
+        <div>hello</div>
       </div>
     );
   }
