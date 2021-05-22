@@ -15,11 +15,11 @@ export default class Music extends React.Component {
       title: "Music",
       cols: {
         songs: [
-          { name: "count", header: "#" },
+          { name: "count", header: "#", iconCls: true },
           { name: "title", header: "Title" },
           { name: "artist", header: "Artist" },
           { name: "dateadded", header: "Date Added" },
-          { name: "delete", header: "" },
+          { name: "delete", header: "", iconCls: "fas fa-minus-circle fa-lg", iconFunc: this.deleteSong },
         ]
       },
       songs: [],
@@ -76,7 +76,6 @@ export default class Music extends React.Component {
           data={this.state.songs}
           cols={this.state.cols.songs}
           id={this.state.songs_id}
-          delClick={this.deleteSong}
         />
       </div>
     );
