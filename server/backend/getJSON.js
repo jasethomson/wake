@@ -10,14 +10,15 @@ module.exports = getJSON = (options, nodeRes) => {
       output += data;
     });
 
-    res.on('end', () => {
+    res.on('end', endRes => {
       let obj = JSON.parse(output);
       nodeRes.status(res.statusCode).send(obj);
     });
   });
 
-  req.on('error', (err) => {
-    nodeRes.status(res.statusCode).send(obj);
+  req.on('error', err => {
+    console.log(err);
+    nodeRes.status(res.statusCode).send(err);
   });
 
   req.end();
