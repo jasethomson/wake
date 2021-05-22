@@ -1,6 +1,4 @@
-import React, { useContext, createContext, useState } from 'react';
-import AppContext from '../context';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 
 const Search = props => {
   const [state, setState] = useState({ value: '', id: '' });
