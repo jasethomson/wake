@@ -1,21 +1,13 @@
-import React, { useContext, createContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import AppContext from '../context';
+import { Routes } from '../utils/routes';
 
 const Nav = () => {
-  const navContext = useContext(AppContext);
-  navContext.Nav = { Title: "Nav" };
-  createContext(navContext);
-  console.log('nav', navContext);
+  const routes = Routes(true);
   return (
     <nav>
       <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/music">Music</Link>
-        </li>
+        {routes.map(route => <li key={`link-${route.path}`}><Link to={route.path}>{route.title}</Link></li>)}
       </ul>
     </nav>
   );

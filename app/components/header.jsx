@@ -1,12 +1,7 @@
 import React, { useContext, createContext } from 'react';
-import { Link } from 'react-router-dom';
-import AppContext from '../context';
+import Search from './search';
 
 const Header = props => {
-  const headerContext = useContext(AppContext);
-  headerContext.Header = { Title: "Header" };
-  createContext(headerContext);
-  console.log('header', headerContext);
   return (
     <div className={`header`}>
       {props.title ? <h1>{props.title}</h1> : null}
@@ -15,40 +10,10 @@ const Header = props => {
   );
 }
 
-class Search extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {
-      value: '',
-      id: ''
-    }
-  }
-
-  handleChange(e) {
-    let value = e.target.value;
-    let id = this.props.pageProps.stateVal ? this.props.pageProps.stateVal(value) : '';
-    this.setState({ value, id });
-  }
-
-  handleSubmit() {
-    event.preventDefault();
-    this.props.pageProps.handleSubmit({ value: this.state.value, id: this.state.id });
-    this.setState({ value: '', id: '' });
-  }
-
-  render() {
-    console.log("search", this.context);
-    this.context.Search = this.state;
-    return (
-      <form onSubmit={this.handleSubmit} className={`search`}>
-        <button className="btn-icon" type="submit"><i className="fas fa-search"></i></button>
-        <input type="text" value={this.state.value} onChange={this.handleChange} />
-      </form>
-    )
-  }
-}
-Search.contextType = AppContext;
-
 export default Header;
+
+
+// const headerContext = useContext(AppContext);
+// headerContext.Header = { Title: "Header" };
+// createContext(headerContext);
+// console.log('header', headerContext);
