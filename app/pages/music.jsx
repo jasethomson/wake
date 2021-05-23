@@ -26,8 +26,6 @@ const Music = props => {
   );
   const [songs, setSongs] = useState([]);
 
-
-
   useEffect(() => {
     getSongs();
   }, []);
