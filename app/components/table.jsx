@@ -6,7 +6,7 @@ const Table = props => {
       <thead>
         <tr>
           {props.cols.map(col => {
-            return <th className={`td-${col.name}`} key={col.name}>{col.header}</th>
+            return <th className={`td-${col.name}`} key={`th-${col.name}`}>{col.header}</th>
           })}
         </tr>
       </thead>
@@ -27,7 +27,7 @@ const rows = props => {
       <tr key={dataPiece[props.id]}>
         {props.cols.map(col => {
           if (col.name === "count") count++;
-          return col.iconCls ? icons(col, props, count) : <td key={dataPiece[col.name]}>{dataPiece[col.name]}</td>;
+          return col.iconCls ? icons(col, props, count, dataPiece) : <td key={dataPiece[col.name]}>{dataPiece[col.name]}</td>;
         })}
       </tr>
     );
@@ -35,7 +35,7 @@ const rows = props => {
   return rows;
 }
 
-const icons = (col, props, count) => {
+const icons = (col, props, count, dataPiece) => {
   return col.name === "count" ?
     <td className="td-count" key={count}>{count}</td> :
     <td className="td-icon" key={`${count}-${col.name}`}><div onClick={() => col.iconFunc(dataPiece[props.id])}><i className={col.iconCls}></i></div></td>;

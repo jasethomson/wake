@@ -1,44 +1,49 @@
-import React from "react";
-import AppContext from "../context";
-
+import React, { useState, useEffect } from "react";
 import Header from "../components/header";
 import Table from "../components/table";
 import { getYouTubeData, getYoutubeId } from "../utils/tube";
 
-export default class Music extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.addSong = this.addSong.bind(this);
-    this.deleteSong = this.deleteSong.bind(this);
-    this.state = {
-      title: "Music",
-      cols: {
-        songs: [
-          { name: "count", header: "#", iconCls: true },
-          { name: "title", header: "Title" },
-          { name: "artist", header: "Artist" },
-          { name: "dateadded", header: "Date Added" },
-          { name: "delete", header: "", iconCls: "fas fa-minus-circle fa-lg", iconFunc: this.deleteSong },
-        ]
-      },
-      songs: [],
-      songs_id: "song_id"
+const Music = props => {
+  const deleteSong = id => {
+    fetch(`http://localhost:5000/music/${id}`, {
+      method: "DELETE"
+    })
+      .then(res => res.json())
+      .then(result => getSongs());
+  }
+
+  const [songId, setSongId] = useState('song_id');
+  const [cols, setCols] = useState(
+    {
+      songs: [
+        { name: "count", header: "#", iconCls: true },
+        { name: "title", header: "Title" },
+        { name: "artist", header: "Artist" },
+        { name: "dateadded", header: "Date Added" },
+        { name: "delete", header: "", iconCls: "fas fa-minus-circle fa-lg", iconFunc: deleteSong }
+      ]
     }
-  }
+  );
+  const [songs, setSongs] = useState([]);
 
-  handleSubmit(submission) {
+
+
+  useEffect(() => {
+    getSongs();
+  }, []);
+
+  const handleSubmit = submission => {
     event.preventDefault();
-    let youTubeData = submission.id.length > 1 ? getYouTubeData(submission.id, this.addSong) : null;
+    let youTubeData = submission.id.length > 1 ? getYouTubeData(submission.id, addSong) : null;
   }
 
-  getSongs() {
+  const getSongs = () => {
     fetch(`http://localhost:5000/music`)
       .then(res => res.json())
-      .then(songs => this.setState({ songs }))
+      .then(songs => setSongs(songs))
   }
 
-  addSong(song) {
+  const addSong = song => {
     fetch(`http://localhost:5000/music`, {
       method: "POST",
       headers: {
@@ -47,39 +52,23 @@ export default class Music extends React.Component {
       body: JSON.stringify(song)
     })
       .then(res => res.json())
-      .then(song => this.setState({ songs: [...this.state.songs, song] }));
+      .then(song => setSongs([...this.state.songs, song]));
   }
 
-  deleteSong(id) {
-    fetch(`http://localhost:5000/music/${id}`, {
-      method: "DELETE"
-    })
-      .then(res => res.json())
-      .then(result => this.getSongs());
-  }
-
-  componentDidMount() {
-    this.getSongs();
-  }
-
-  render() {
-    console.log("music", this.context);
-    this.context.Music = this.state;
-    return (
-      <div className="pageTop pageMusic">
-        <Header
-          search
-          stateVal={getYoutubeId}
-          handleSubmit={this.handleSubmit}
-        />
-        <Table
-          data={this.state.songs}
-          cols={this.state.cols.songs}
-          id={this.state.songs_id}
-        />
-      </div>
-    );
-  }
+  return (
+    <div className="pageTop pageMusic">
+      <Header
+        search
+        stateVal={getYoutubeId}
+        handleSubmit={handleSubmit}
+      />
+      <Table
+        data={songs}
+        cols={cols.songs}
+        id={songId}
+      />
+    </div>
+  );
 }
 
-Music.contextType = AppContext;
+export default Music;
